@@ -5,6 +5,7 @@ import { Construct } from 'constructs'
 export class PhotosStack extends cdk.Stack {
 
     private stackSuffix: string;
+    public readonly photosBucketArn: string
 
     constructor(scope: Construct, id: string, props?: cdk.StackProps){
         super(scope, id)
@@ -15,10 +16,10 @@ export class PhotosStack extends cdk.Stack {
             bucketName: `mycrazybucket-${this.stackSuffix}`
         })
 
-        new cdk.CfnOutput(this, 'photos-bucket', {
-            value:myBucket.bucketArn,
-            exportName:'photos-bucket'
-        })
+        this.photosBucketArn = myBucket.bucketArn
+
+
+
         // you can not change the logicalId without deleting the last one
         // with the same name
         // if changes logicalID ( Photos Bucket), you would need to use

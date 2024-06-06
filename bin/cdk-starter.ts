@@ -7,8 +7,10 @@ import { PhotosHandlerStack } from '../lib/PhotosHandlerStack';
 
 const app = new cdk.App();
 // new CdkStarterStack(app, 'CdkStarterStack', {});
-new PhotosStack(app, 'PhotosStack')
-new PhotosHandlerStack(app, 'PhotosHandlerStack')
+const photosStack = new PhotosStack(app, 'PhotosStack')
+new PhotosHandlerStack(app, 'PhotosHandlerStack', {
+  targetBucketArn: photosStack.photosBucketArn
+})
 
 // new CdkStarterStack(app, 'CdkStarterStack', {
 //   /* If you don't specify 'env', this stack will be environment-agnostic.
